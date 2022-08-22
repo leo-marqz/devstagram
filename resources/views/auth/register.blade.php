@@ -93,7 +93,7 @@ Crear nueva cuenta
                         name="password_confirmation"
                         id="password_confirmation"
                         value="{{ old('password_confirmation') }}"
-                        placeholder="eje: F4rack"
+                        placeholder="Repite tu constraseña"
                         class="border p-3 w-full rounded-lg @error('password_confirmation') border-red-600 @enderror"
                     />
                     @error('password_confirmation')
@@ -105,7 +105,7 @@ Crear nueva cuenta
                 <input
                     type="submit"
                     value="Registrarme"
-                    class="bg-sky-600 hover:bg-sky-700 transition-colors cursor-pointer uppercase font-bold w-full p-2 text-white rounded"
+                    class="bg-sky-600 mt-3 hover:bg-sky-700 transition-colors cursor-pointer uppercase font-bold w-full p-2 text-white rounded"
                 />
             </form>
         </div>

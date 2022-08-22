@@ -14,15 +14,37 @@
 
         <header class="p-5 border-b bg-white shadow">
             <div class="container mx-auto flex justify-between">
-                <a href="{{ route('main') }}" class="text-3xl font-black">DevStagram</a>
-                <nav class="flex gap-2 items-center">
-                    <a href="#" class="font-bold uppercase text-gray-600 text-sm hover:text-gray-800">
-                        iniciar session
-                    </a>
-                    <a href="{{ route('register') }}" class="font-bold uppercase text-gray-600 text-sm hover:text-gray-800">
-                        registrarse
-                    </a>
-                </nav>
+                <a href="{{ route('main') }}" class="text-3xl font-black hover:text-rose-500">
+                    <h1>DevStagram</h1>
+                </a>
+
+                @auth
+                    {{-- if authenticated --}}
+                    <nav class="flex gap-2 items-center">
+                        <a href="{{ route('login') }}" class="font-bold  text-gray-600 text hover:text-amber-600">
+                            Hola:
+                            <span class="font-normal">
+                                 {{ auth()->user()->username }}
+                            </span>
+                        </a>
+                        <form action="{{ route('logout') }}" class="" method="POST">
+                            @csrf
+                            <button type="submit" class="font-bold rounded-lg text-gray-500 hover:text-red-600 ">
+                                Logout
+                            </button>
+                        </form>
+                    </nav>
+                @endauth
+                @guest
+                    <nav class="flex gap-2 items-center">
+                        <a href="{{ route('login') }}" class="font-bold capitalize text-gray-600 text hover:text-amber-600">
+                            login
+                        </a>
+                        <a href="{{ route('register') }}" class="font-bold capitalize text-gray-600 text hover:text-sky-600">
+                            sign up
+                        </a>
+                    </nav>
+                @endguest
             </div>
         </header>
 
