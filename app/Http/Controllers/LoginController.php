@@ -13,15 +13,16 @@ class LoginController extends Controller
 
     public function store(Request $request)
     {
+        // dd($request->remember);
         $this->validate($request, [
             'email'=>'required|email',
             'password'=>'required',
         ]);
-
-        if(!auth()->attempt($request->only('email', 'password')))
+        //remenber [ input:checkbox ] es para mantener la session
+        if(!auth()->attempt($request->only('email', 'password'), $request->remember))
         {
             return back()->with('message', 'Incorrect credentials !!');
         }
-        return redirect()->route('posts.index');
+        return redirect()->route('posts.index', auth()->user()->username);
     }
 }

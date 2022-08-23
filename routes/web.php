@@ -5,6 +5,7 @@ use App\Http\Controllers\LogoutController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\RegisterController;
+use App\Http\Controllers\ImagenController;
 
 /*
 |--------------------------------------------------------------------------
@@ -31,5 +32,8 @@ Route::post('/login',[LoginController::class, 'store']); //->name('login');
 //para seguridad y tener acceso a @csrf
 Route::post('/logout', [LogoutController::class, 'store'])->name('logout');
 
-Route::get('/muro', [PostController::class, 'index'])->name('posts.index');
+Route::get('/{user:username}', [PostController::class, 'index'])->name('posts.index');
+Route::get('/posts/create', [PostController::class, 'create'])->name('posts.create');
+
+Route::post('/image', [ImagenController::class, 'store'])->name('images.store');
 
