@@ -9,6 +9,8 @@ Crear una nueva publicación
 <link rel="stylesheet" href="https://unpkg.com/dropzone@5/dist/min/dropzone.min.css" type="text/css" />
 @endpush
 
+
+
 @section('content')
 
 <section class="md:flex md:justify-center md:gap-10 gap-10 md:items-center">
@@ -18,7 +20,7 @@ Crear una nueva publicación
         </form>
     </div>
     <div class="md:w-4/12 bg-white p-6 rounded-lg shadow-lg md:mt-0 mt-10 ">
-        <form action="{{ route('register') }}" method="POST">
+        <form action="{{ route('posts.store') }}" method="POST">
             @csrf
             <div class="mb-4">
                 <label for="title" class="mb-2 block uppercase text-gray-500 font-bold">
@@ -33,7 +35,7 @@ Crear una nueva publicación
                     class="border p-3 w-full rounded-lg @error('title') border-red-600 @enderror"
                 />
                 @error('title')
-                    <p class="bg-red-600 text-red my-1 text-sm p-1 rounded-lg text-center">
+                    <p class="bg-red-600 text-white my-1 text-sm p-1 rounded-lg text-center">
                         {{$message}}
                     </p>
                 @enderror
@@ -49,7 +51,7 @@ Crear una nueva publicación
                     class="border p-3 w-full rounded-lg @error('description') border-red-600 @enderror"
                 >{{ old('description') }}</textarea>
                 @error('description')
-                    <p class="bg-red-600 text-red my-1 text-sm p-1 rounded-lg text-center">
+                    <p class="bg-red-600 text-white my-1 text-sm p-1 rounded-lg text-center">
                         {{$message}}
                     </p>
                 @enderror
@@ -63,5 +65,7 @@ Crear una nueva publicación
         </form>
     </div>
 </section>
+
+
 
 @endsection
