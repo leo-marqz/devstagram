@@ -57,6 +57,19 @@ Crear una nueva publicación
                 @enderror
             </div>
 
+            <div class="mb-4">
+                <input
+                    type="hidden"
+                    name="image"
+                    value="{{old('image')}}"
+                />
+                @error('image')
+                    <p class="bg-red-600 text-white my-1 text-sm p-1 rounded-lg text-center">
+                        {{$message}}
+                    </p>
+                @enderror
+            </div>
+
             <input
                     type="submit"
                     value="Publicar"
