@@ -42,4 +42,11 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    // referencia a post, un usuario a muchos posts.
+    public function posts()
+    {
+        return $this->hasMany(Post::class);
+    }
+
 }
