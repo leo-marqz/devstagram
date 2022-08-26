@@ -14,8 +14,11 @@ class PostController extends Controller
     }
     public function index(User $user)
     {
-        // dd(auth()->user());
-        return view('dashboard', ['user'=>$user]);
+        $posts = Post::where('user_id', $user->id)->paginate(20);
+        return view('dashboard', [
+            'user'=>$user,
+            'posts'=>$posts,
+        ]);
     }
 
     public function create()
@@ -31,7 +34,25 @@ class PostController extends Controller
             'image'=>'required'
         ]);
 
-        Post::create([
+        //forma 1 de guardar un registro
+        // Post::create([
+        //     'title' => $request->title,
+        //     'description' => $request->description,
+        //     'image' => $request->image,
+        //     'user_id' => auth()->user()->id
+        // ]);
+
+        //forma 2 de guardar un registro
+        // $post = new Post();
+        // $post->title = $request->title;
+        // $post->description = $request->description;
+        // $post->image = $request->image;
+        // $post->user_id = auth()->user()->id;
+        // $post->save();
+
+        //forma 3 de guardar un registro
+        //Esta se hace si se ha creado una relacion en los modelos post y user
+        $request->user()->posts()->create([
             'title' => $request->title,
             'description' => $request->description,
             'image' => $request->image,
