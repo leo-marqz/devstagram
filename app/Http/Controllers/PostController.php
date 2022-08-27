@@ -2,9 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\User;
 use App\Models\Post;
+use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\File;
 
 class PostController extends Controller
 {
@@ -65,5 +66,17 @@ class PostController extends Controller
     public function show(User $user, Post $post)
     {
         return view('posts.show', ['post'=>$post, 'user'=>$user]);
+    }
+
+    public function destroy(Request $request, Post $post)
+    {
+        //esta policy verifica si tienes permiso de eliminar el post
+        $this->authorize('delete', $post);
+        $post->delete();
+        $imagePath = public_path('uploads') . "/" . $post->image;
+        if(File::exists($imagePath)){
+            unlink($imagePath); //elimina la imagen
+        }
+        return redirect()->route('posts.index', auth()->user()->username);
     }
 }
