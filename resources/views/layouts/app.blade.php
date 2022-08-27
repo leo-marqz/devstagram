@@ -7,6 +7,7 @@
         <title>DevStagram - @yield('title')</title>
         {{-- espacio reservador para estilos css --}}
         @stack('styles')
+        @stack('scripts')
         @vite(['resources/css/app.css', 'resources/js/app.js'])
         <link rel="stylesheet" href="{{ asset('css/styles.css') }}">
 
@@ -74,6 +75,6 @@
             Copyright © {{ now()->year }}  DevStagram
         </footer>
 
-        <script src="{{ asset('js/index.js') }}"></script>
+        {{-- <script src="{{ asset('js/index.js') }}"></script> --}}
     </body>
 </html>

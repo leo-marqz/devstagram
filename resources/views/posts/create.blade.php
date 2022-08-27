@@ -9,6 +9,9 @@ Crear una nueva publicación
 <link rel="stylesheet" href="https://unpkg.com/dropzone@5/dist/min/dropzone.min.css" type="text/css" />
 @endpush
 
+@push('scripts')
+<script src="{{asset('js/upload_image_post.js')}}" ></script>
+@endpush
 
 
 @section('content')
@@ -78,6 +81,7 @@ Crear una nueva publicación
         </form>
     </div>
 </section>
+
 
 
 

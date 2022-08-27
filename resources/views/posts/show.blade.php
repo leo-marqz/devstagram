@@ -5,28 +5,40 @@
 @endsection
 
 @section('content')
-<div class="container mx-auto flex gap-5 justify-center">
-    <div class="md:w-1/3">
+<div class="container mx-auto md:flex md:justify-center gap-5 justify-center">
+    <div class="md:w-5/12">
         <img src="{{asset('uploads') . '/' . $post->image}}" alt="Imagen del post: {{$post->title}}">
-        <div class="py-2 px-0">
-            <p class="">0 likes</p>
+        <div class="py-1 px-0">
+            <p class=""> <span>💖</span> 1 likes</p>
         </div>
         <div class="">
-            <p class="font-bold">{{$post->user->username}}</p>
+            <p class="font-bold">
+                {{$post->user->username}}
+                <span class="font-normal text-gray-600 text-sm ml-2">
+                    {{$post->created_at->diffForHumans()}}
+                </span>
+            </p>
             {{-- diffForHumans formatea la fecha eje: 'hace 1 dia' --}}
-            <p class="text-sm text-gray-500">{{$post->created_at->diffForHumans()}}</p>
             <p class="mt-1">
                 {{$post->description}}
             </p>
         </div>
     </div>
     {{-- ------------------------------- --}}
-    <div class="md:w-1/3">
-        <div class="shadow bg-white p-5 mb-5">
-            <p class="text-xl font-bold text-center mb-4">
+    <div class="md:w-5/12">
+        <div class="shadow bg-white p-5 border-lg  mb-5">
+            @auth
+            <p class="text-2xl font-bold text-center mb-4">
                 Agrega un nuevo comentario
             </p>
-            <form action="#">
+
+            <p class="@if(session('message')) bg-green-500 @endif p-2 rounded-lg mb-6 text-white text-center uppercase">
+                  @if (session('message'))
+                {{session('message')}}
+                @endif
+              </p>
+
+            <form action="{{route('comments.store', ['user'=>$user, 'post'=>$post])}}" method="POST">
                 @csrf
 
                 <div class="mb-4">
@@ -52,6 +64,33 @@
                     class="bg-sky-600 mt-3 hover:bg-sky-700 transition-colors cursor-pointer uppercase font-bold w-full p-2 text-white rounded"
                 />
             </form>
+            @endauth
+
+            <div class="bg-white shadow mb-5 max-h-72 overflow-scroll border p-3 mt-6 rounded-lg">
+                @if ($post->comments->count())
+                    @foreach ($post->comments as $comment)
+                        <div class="p-5 border-b border-gray-300">
+                            <a href="{{route('posts.index', $comment->user)}}" class="font-semibold text-xl">
+                                @php
+                                    $userAuth = auth()->user()->username;
+                                    $userComment = $comment->user->username;
+                                    $result = ($userAuth == $userComment) ?? null;
+                                @endphp
+                                @if ($result)
+                                    Tu
+                                @else
+                                    {{$comment->user->username}}  
+                                @endif
+                                <span class="font-normal text-gray-600 text-sm ml-2">{{$comment->created_at->diffForHumans()}}</span>
+                            </a>
+                            <p class="pl-5 text-gray-700">{{$comment->comment}}</p> 
+                        </div>
+                    @endforeach
+                @else
+                <p class="p-10 text-center">No hay Comentarios!!</p>
+                @endif
+            </div>
+
         </div>
     </div>
 
