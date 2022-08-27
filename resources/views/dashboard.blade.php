@@ -26,7 +26,7 @@ Perfil: {{ $user->username }}
     <div class="grid md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 md:justify-content-center lg:justify-content-center xl:justify-content-center">
             @foreach ($posts as $post)
                 <div class="">
-                    <a href="#"><img src="{{ asset('uploads') . "/" . $post->image }}" alt="imagen de post {{ $post->title }}"></a>
+                    <a href="{{route('posts.show', ['user'=>$user->username ,'post'=>$post])}}"><img src="{{ asset('uploads') . "/" . $post->image }}" alt="imagen de post {{ $post->title }}"></a>
                 </div>
             @endforeach
         </div>
