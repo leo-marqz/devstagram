@@ -7,6 +7,7 @@ use App\Http\Controllers\ImagenController;
 use App\Http\Controllers\LogoutController;
 use App\Http\Controllers\CommentController;
 use App\Http\Controllers\LikeController;
+use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\RegisterController;
 
 /*
@@ -23,6 +24,13 @@ use App\Http\Controllers\RegisterController;
 Route::get('/', function () {
     return view('main');
 })->name('main');
+
+//rutas para el perfil
+
+Route::get('/edit-profile', [ProfileController::class, 'index'])
+        ->name('profile.index');
+Route::post('/edit-profile', [ProfileController::class, 'store'])
+        ->name('profile.store');
 
 // Route::get('/create-account',[RegisterController::class, 'index'])->name('register');
 Route::get('/register',[RegisterController::class, 'index'])->name('register');
@@ -52,4 +60,5 @@ Route::post('/posts/{post}/likes', [LikeController::class, 'store'])
 
 Route::delete('/posts/{post}/likes', [LikeController::class, 'destroy'])
        ->name('posts.likes.destroy');
+
 
