@@ -17,7 +17,7 @@
         <header class="p-5 border-b bg-white shadow">
             <div class="max-w-7xl mx-auto flex justify-between">
                 <a href="{{ route('main') }}" class="text-3xl font-black hover:text-rose-500">
-                    <h1>DevStagram</h1>
+                    DevStagram
                 </a>
 
                 @auth

@@ -7,6 +7,7 @@ use App\Http\Controllers\ImagenController;
 use App\Http\Controllers\LogoutController;
 use App\Http\Controllers\CommentController;
 use App\Http\Controllers\FollowerController;
+use App\Http\Controllers\HomeController;
 use App\Http\Controllers\LikeController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\RegisterController;
@@ -22,9 +23,7 @@ use App\Http\Controllers\RegisterController;
 |
 */
 
-Route::get('/', function () {
-    return view('main');
-})->name('main');
+Route::get('/', HomeController::class)->name('main'); //usamos el metodo __invoke
 
 //rutas para el perfil
 
@@ -67,3 +66,5 @@ Route::post('/{user:username}/follow', [FollowerController::class, 'store'])
       ->name('users.follow');
 Route::delete('/{user:username}/follow', [FollowerController::class, 'destroy'])
       ->name('users.unfollow');
+
+

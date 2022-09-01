@@ -10,7 +10,7 @@
         <img src="{{asset('uploads') . '/' . $post->image}}" alt="Imagen del post: {{$post->title}}">
         <div class="py-1 px-0">
             @auth
-            <div class="flex items-center gap-3 py-2"> 
+            <div class="flex items-center gap-3 py-2">
                 @if ($post->checkLike( auth()->user() ) )
                     <form action="{{route('posts.likes.destroy', $post)}}" method="POST" >
                         @method('DELETE')
@@ -51,12 +51,12 @@
                     @if ($post->user_id === auth()->user()->id)
                         <form action="{{route('posts.destroy', $post)}}" method="POST" >
                             {{-- METHOD SPOOFING [ PATCH, PUT, DELETE ] --}}
-                            @method('DELETE') 
+                            @method('DELETE')
                             @csrf
-                            <input 
-                                type="submit" 
+                            <input
+                                type="submit"
                                 value="Eliminar publicación"
-                                class="bg-red-500 hover:bg-red-600 p-2 rounded text-white font-bold mt-4 cursor-pointer" 
+                                class="bg-red-500 hover:bg-red-600 p-2 rounded text-white font-bold mt-4 cursor-pointer"
                             />
                         </form>
                     @endif
@@ -111,15 +111,18 @@
                     @foreach ($post->comments as $comment)
                         <div class="p-5 border-b border-gray-300">
                             <a href="{{route('posts.index', $comment->user)}}" class="font-semibold text-xl">
-                                
-                                @if ($comment->user->username === auth()->user()->username)
-                                    Tu
+                                @if (auth()->user()->username??false)
+                                    @if($comment->user->username === auth()->user()->username)
+                                        Tu
+                                    @else
+                                        {{$comment->user->username}}
+                                    @endif
                                 @else
-                                    {{$comment->user->username}}  
+                                        {{$comment->user->username}}
                                 @endif
                                 <span class="font-normal text-gray-600 text-sm ml-2">{{$comment->created_at->diffForHumans()}}</span>
                             </a>
-                            <p class="pl-5 text-gray-700">{{$comment->comment}}</p> 
+                            <p class="pl-5 text-gray-700">{{$comment->comment}}</p>
                         </div>
                     @endforeach
                 @else
