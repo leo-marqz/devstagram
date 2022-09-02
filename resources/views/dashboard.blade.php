@@ -75,20 +75,9 @@
     </div>
 </section>
 
-<section class="max-w-7xl mx-auto mt-10">
+<section class="mt-10">
     <h2 class="text-4xl text-center font-black my-7">Publicaciones</h2>
-    @if ($posts->count())
-    <div class="grid md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 md:justify-content-center lg:justify-content-center xl:justify-content-center">
-            @foreach ($posts as $post)
-                <div class="">
-                    <a href="{{route('posts.show', ['user'=>$user->username ,'post'=>$post])}}"><img src="{{ asset('uploads') . "/" . $post->image }}" alt="imagen de post {{ $post->title }}"></a>
-                </div>
-            @endforeach
-        </div>
-        <div class="py-10"> {{ $posts->links('pagination::tailwind') }} </div>
-    @else
-        <p class="text-gray-500 uppercase text-center font-bold p-4 rounded-lg bg-gray-200">No hay posts ...</p>
-    @endif
+    <x-list-post :posts="$posts" />
 </section>
 
 @endsection
