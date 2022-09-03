@@ -20,7 +20,6 @@ class HomeController extends Controller
         $usersId = auth()->user()->following->pluck('id')->toArray();
         // dd($usersId);
         $posts = Post::whereIn('user_id', $usersId)->latest()->paginate(20);
-        // dd($posts);
         return view('home', ['posts'=>$posts]);
     }
 

@@ -77,7 +77,10 @@
 
 <section class="mt-10">
     <h2 class="text-4xl text-center font-black my-7">Publicaciones</h2>
-    <x-list-post :posts="$posts" />
+    @php
+        $isHome=false;
+    @endphp
+    <x-list-post :posts="$posts" :isHome="false" />
 </section>
 
 @endsection

@@ -7,14 +7,16 @@ use Illuminate\View\Component;
 class ListPost extends Component
 {
     public $posts;
+    public $isHome;
     /**
      * Create a new component instance.
      *
      * @return void
      */
-    public function __construct($posts)
+    public function __construct($posts, $isHome)
     {
         $this->posts = $posts;
+        $this->isHome = $isHome;
     }
 
     /**

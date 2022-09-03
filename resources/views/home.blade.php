@@ -6,7 +6,7 @@ Bienvenidos a Home
 
 @section('content')
 
-<x-list-post :posts="$posts" />
+<x-list-post :posts="$posts" :isHome="true" />
 
 {{-- componente de laravel --}}
 {{-- <x-list-post /> si no pasas Slots --}}
